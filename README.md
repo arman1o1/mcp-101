@@ -95,4 +95,4 @@ uv add "mcp[cli]"
 
 ---
 
-*Built with ❤️ for the MCP community*
+### Built with ❤️ for the MCP community

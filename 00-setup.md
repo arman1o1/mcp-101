@@ -28,14 +28,14 @@ The **Model Context Protocol (MCP)** is an open standard developed by Anthropic 
 MCP provides three main primitives:
 
 | Primitive | Description | Example |
-|-----------|-------------|---------|
+| :--- | :--- | :--- |
 | **🔧 Tools** | Functions that LLMs can call (with user approval) | Fetch weather data, query databases |
 | **📁 Resources** | File-like data that clients can read | API responses, file contents |
 | **📝 Prompts** | Pre-written templates for specific tasks | Code review template, analysis prompt |
 
 ### How MCP Works
 
-```
+```text
 ┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
 │                 │       │                 │       │                 │
 │   LLM Client    │◄─────►│   MCP Server    │◄─────►│  External API   │
@@ -68,7 +68,7 @@ Before setting up MCP, ensure you have the following:
 ## System Requirements
 
 | Component | Minimum Requirement |
-|-----------|---------------------|
+| :--- | :--- |
 | **Python** | 3.10 or higher |
 | **MCP SDK** | 1.2.0 or higher |
 | **OS** | Windows, macOS, or Linux |
@@ -90,7 +90,7 @@ If you need to install Python, visit [python.org](https://www.python.org/downloa
 MCP provides two main installation methods:
 
 | Method | Best For | Package Manager |
-|--------|----------|-----------------|
+| :--- | :--- | :--- |
 | **uv** (Recommended) | New projects, faster installs | `uv add "mcp[cli]"` |
 | **pip** | Existing projects | `pip install mcp` |
 
@@ -147,7 +147,7 @@ uv pip list | Select-String mcp
 
 ### Project Structure After Setup
 
-```
+```text
 my-mcp-server/
 ├── .venv/                  # Virtual environment
 ├── .python-version         # Python version file
@@ -206,7 +206,7 @@ To use your MCP server with Claude Desktop, you need to configure the `claude_de
 ### Step 1: Locate the Config File
 
 | Operating System | Config File Location |
-|------------------|---------------------|
+| :--- | :--- |
 | **macOS** | `~/Library/Application Support/Claude/claude_desktop_config.json` |
 | **Windows** | `%APPDATA%\Claude\claude_desktop_config.json` |
 | **Linux** | `~/.config/claude/claude_desktop_config.json` |
@@ -344,7 +344,7 @@ if __name__ == "__main__":
 ### Key Components Explained
 
 | Component | Purpose |
-|-----------|---------|
+| :--- | :--- |
 | `FastMCP("name")` | Initialize server with a unique name |
 | `@mcp.tool()` | Decorator to register a function as an MCP tool |
 | `docstring` | Describes the tool for the LLM |
@@ -376,14 +376,14 @@ python server.py
 
 The **MCP Inspector** is an interactive, browser-based developer tool for testing and debugging MCP servers. Think of it as **Postman for MCP** - it lets you test your tools without needing Claude Desktop.
 
-#### Prerequisites
+#### Inspector Prerequisites
 
 - **Node.js** must be installed on your system
 - Verify with: `node --version`
 
 #### Running MCP Inspector
 
-**Option A: Inspect your local server directly**
+##### Inspect your local server directly
 
 ```bash
 # General syntax
@@ -394,7 +394,7 @@ npx @modelcontextprotocol/inspector uv --directory path/to/server run server.py
 
 ```
 
-**Option B: Run Inspector and connect via UI**
+##### Run Inspector and connect via UI
 
 ```bash
 # Just launch the Inspector (without specifying a server)
@@ -409,22 +409,22 @@ This opens the Inspector at `http://localhost:6274` where you can configure your
 
 2. **In the left sidebar**, you'll see the **Server Connection** panel with these fields:
 
-   | Field | Value for Our Server |
-   |-------|---------------------|
-   | **Transport Type** | `STDIO` |
-   | **Command** | `uv` |
-   | **Arguments** | `run server.py` |
-   | **Environment Variables** | (leave empty) |
+| Field | Value for Our Server |
+| :--- | :--- |
+| **Transport Type** | `STDIO` |
+| **Command** | `uv` |
+| **Arguments** | `run server.py` |
+| **Environment Variables** | (leave empty) |
 
-3. **Set the working directory** (if available) or ensure you launched the Inspector from your project folder
+1. **Set the working directory** (if available) or ensure you launched the Inspector from your project folder
 
-4. **Click "Connect"** to establish the connection
+2. **Click "Connect"** to establish the connection
 
-5. **Verify connection** - The status should change to "Connected" and you'll see your tools listed
+3. **Verify connection** - The status should change to "Connected" and you'll see your tools listed
 
 > **💡 Tip:** Running the Inspector from inside your project folder (`my-mcp-server`) makes it easier because you don't need to specify the full path.
 
-**Example: Connecting from Project Folder**
+##### Connecting from Project Folder
 
 ```powershell
 # Navigate to your project
@@ -445,7 +445,7 @@ npx @modelcontextprotocol/inspector
 Once connected, you'll see these tabs:
 
 | Tab | Purpose |
-|-----|---------|
+| :--- | :--- |
 | **🔧 Tools** | List all available tools, test them with custom inputs, see results |
 | **📁 Resources** | View available resources, inspect content, test subscriptions |
 | **📝 Prompts** | Display prompt templates, test with arguments, preview messages |
@@ -475,7 +475,7 @@ Once connected, you'll see these tabs:
 #### Why Use MCP Inspector?
 
 | Use Case | Benefit |
-|----------|---------|
+| :--- | :--- |
 | **Initial Development** | Verify tools work before connecting to Claude |
 | **Debugging** | See raw JSON requests/responses |
 | **Schema Validation** | Confirm your tool definitions are correct |
@@ -489,7 +489,7 @@ Once connected, you'll see these tabs:
 
 #### ❌ Python Version Too Old
 
-```
+```text
 Error: Python 3.10+ is required
 ```
 
@@ -499,7 +499,7 @@ Error: Python 3.10+ is required
 
 #### ❌ MCP Package Not Found
 
-```
+```text
 ModuleNotFoundError: No module named 'mcp'
 ```
 
@@ -536,6 +536,7 @@ print("Processing request...")
 
 # ✅ Good - Use logging instead
 import logging
+import sys
 logging.basicConfig(level=logging.INFO, stream=sys.stderr)
 logger = logging.getLogger(__name__)
 logger.info("Processing request...")
@@ -574,7 +575,7 @@ Or use forward slashes (works on Windows too):
 ## Key Takeaways
 
 | Topic | Key Points |
-|-------|------------|
+| :--- | :--- |
 | **What is MCP?** | Open standard for connecting LLMs to external tools and data |
 | **Core Primitives** | Tools, Resources, and Prompts |
 | **Python Requirement** | Python 3.10+ required |
